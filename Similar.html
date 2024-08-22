@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Similar Movies/Series</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .similar-container {
+            padding: 2rem;
+        }
+
+        .similar-container h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        #similar-movies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .movie-item {
+            width: 300px;
+            background-color: #fff;
+            color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .movie-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .movie-item .description {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .movie-item:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            background: #000000;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideIn 1s ease-out forwards;
+            transform: translateY(-100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        header.scrolled {
+            background: #000000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { color: #fff; }
+            50% { color: #ddd; }
+            100% { color: #fff; }
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-buttons button {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        .nav-buttons button:hover {
+            background: #fff;
+            color: #333;
+            transform: scale(1.1);
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hide the sidebar off-screen */
+            background-color: #000000;
+            color: #fff;
+            transition: left 0.3s ease-in-out;
+            overflow-x: hidden;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+            transform: translateX(10px);
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="nav-buttons">
+            <button onclick="toggleSidebar()">☰</button>
+        </div>
+        <div class="logo">Vikings.</div>
+        <div class="nav-buttons">
+            
+        </div>
+    </header>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+        <a href="https://www.youtube.com/watch?v=9GgxinPwAGc"> <br> Vikings. </a>
+        <a href="https://www.youtube.com/watch?v=Yi4YnwFT7Gk"> <br> Viking Valhalla </a>
+        <a href="Similar.html"> <br> Similar Movies/Series </a>
+        
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="similar-container">
+        <h1>Similar Movies/Series</h1>
+        <div id="similar-movies">
+            <div class="movie-item">
+                <a href="https://www.imdb.com/title/tt4179452/">
+                    <img src="https://imgs.search.brave.com/taYre1b4NIQT0vcHRdg2P9uwr1BwJ5PpQiPB-YuYq2Y/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzcxbnJZaWI4dkRM/LmpwZw" alt="Movie 1">
+                    <div class="description">
+                        <h2>The last Kingdom</h2>
+                        <p>"The Last Kingdom" is a historical drama series set in 9th and 10th century England, depicting the clash between Saxons and Vikings. It follows the story of Uhtred of Bebbanburg, a Saxon nobleman captured and raised by Vikings, who must navigate his divided loyalties and reclaim his ancestral home.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a href="https://www.imdb.com/title/tt0944947/">
+                    <img src="https://imgs.search.brave.com/yTu-aVE4h83u1O3VL3GR76EUWi8PdX4Db-xbAchvYSE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mdW5u/eS1waG90by5zMy5h/bWF6b25hd3MuY29t/L3ByZXZpZXcvZ2Ft/ZV9vZl90aHJvbmVz/L2lyb25fdGhyb25l/X21vbnRhZ2UuanBl/Zw" alt="Movie 2">
+                    <div class="description">
+                        <h2>Game Of Thrones GOT</h2>
+                        <p>"Game of Thrones" is a fantasy drama series based on George R.R. Martin's novels, set in the fictional continents of Westeros and Essos. It follows the power struggles among noble families as they vie for control of the Iron Throne and face threats from ancient, supernatural forces.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a href="https://www.imdb.com/title/tt15767808/">
+                    <img src="https://imgs.search.brave.com/hlWG0BXjXiEtQJMzMBnz6KvHiUY6ETAjJSNLEef0u5g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzYxV1ZNUVh1SCtM/LmpwZw" alt="Movie 2">
+                    <div class="description">
+                        <h2>7 Kings Must Die</h2>
+                        <p>"7 Kings Must Die" is a historical drama film that continues the story from "The Last Kingdom," focusing on the turbulent final years of Viking-era England. It follows the aftermath of Uhtred of Bebbanburg’s epic journey as he confronts new challenges and power struggles in a fractured kingdom.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a href="https://www.imdb.com/title/tt11138512/">
+                    <img src="https://imgs.search.brave.com/9fW2xb5ZswPGIsDxV_HC7cvqiiLNHYT0-zHeZe7lITM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zMy5h/bWF6b25hd3MuY29t/L3N0YXRpYy5yb2dl/cmViZXJ0LmNvbS91/cGxvYWRzL21vdmll/L21vdmllX3Bvc3Rl/ci90aGUtbm9ydGht/YW4tMjAyMi9sYXJn/ZV9ub3J0aG1hbl92/ZXIzLmpwZw" alt="Movie 2">
+                    <div class="description">
+                        <h2>The Northman</h2>
+                        <p>
+                            The Northman is a gritty Viking epic following Prince Amleth’s quest for vengeance against his uncle, who murdered his father. With stunning visuals and relentless action, it’s a gripping tale of betrayal and redemption set in a brutal, mythic world.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a href="https://www.imdb.com/title/tt9184986/">
+                    <img src="https://imgs.search.brave.com/c_LVStV2JB3sxeJgU8AkKxHmXHmWqMTPicvObcUmEBA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk56ZGpOV1U0/TVRrdFlUSm1ZaTAw/WVdaaExUbGxZV1V0/WkdZMll6RTNNV1l4/TW1ZNFhrRXlYa0Zx/Y0dkZVFYVnlOakV3/TlRNMk16Y0AuanBn" alt="Movie 2">
+                    <div class="description">
+                        <h2>Barbarians</h2>
+                        <p>Barbarian is an epic historical drama that chronicles the rise of a rebellious warrior as he unites ancient tribes against the might of the Roman Empire. The series vividly brings to life the clash of cultures and the brutal realities of warfare in a tumultuous era.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a href="https://www.imdb.com/title/tt11198330/">
+                    <img src="https://imgs.search.brave.com/1a779rkdCToXZK5i_gLVjTWhh3INGftHd2aY8hRixaI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk0yUXpNR1Zr/TmpVdE4yWTRZaTAw/T0RNd0xUZzNZemt0/WXpVeFlqSmxOakZq/TkRZMVhrRXlYa0Zx/Y0djQC5qcGc" alt="Movie 2">
+                    <div class="description">
+                        <h2>House of the Dragon</h2>
+                        <p>House of the Dragon delves into the fiery history of House Targaryen, exploring the power struggles and dragon-fueled drama that precede the events of Game of Thrones. Set against a backdrop of political intrigue and epic battles, the series unveils the origins of the Targaryen dynasty's tumultuous rise and fall.</p>
+                    </div>
+                </a>
+            </div>
+            <!-- Add more movie items as needed -->
+        </div>
+    </div>
+    <footer>
+        <p style="font-family:Andale Mono, monospace;">&copy; <b>Yessine Aloui</b></p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/yessine.aloui.7" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAMRJREFUSEvtltENgzAMRI9NyibtJmWStpPQTYBJYJT2UCNZESQmNERIzg8fIL/c+YxcodCpCnFxevD159zkPVcN3aOYsAcAB3UQwutYC1PBFwDjSvGsYEIJXzrZwEtqewCDuMUzh9XsaScKqxT6F0np8R1AKwpR7S2m0MBaq0Mp9l18A2hi1ucAv77Qv6V6i+JiYCacSQ8erdWyiI2T/UBiuZrfW7g0Ntk4HTZOXH3kvsUNxK21mlYlp1pdPPRhyjidG/wBFwwxH4oeX7wAAAAASUVORK5CYII="/></a>
+            <a href="https://www.instagram.com/yacine_aloui1/" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAcBJREFUSEvllk1OxDAMhT03gZMABwEBFwFOws9F+NmyZQ+cBPqN/JBJnTZtFhUi0qgznfg9+9lxvLON1m4jXvsTxAdmxmduPc1t4P+5iK/N7MjMjlvAfM+HP++HJ/bpqhFDdBsiFJieU35EJ9l/YmYjuxrxu5Mi280QcZN87o3SgeM4Aelh6WlGjMG5k+Ht0nXqKXxx1SC/M7OLCJQRK1q8bJE24kH64C8gwv4xizoj/nLDWhqQEkUoOoA/PSK+nw2yUlSsSyclkJHcJTigbCSnmcxU6VWiPcCqYpwC983MXh0PXPB+aqUkJh9IkxFHUgpOaSByyFi8L48QeOCuIpYSgP8CcEI5jDPkNp6CLmJFO6rOILtOQxl1F7FAiQbybNXS1EWcGhfs5BkHS1W6iDeTOhZXJrdkzoqvK2IAJSXfkfM59Gad7ew4qRNOHqepBqKOlTWQ2hnmfdqCa50rvVFChEhL48AZIkeBWl9PW3DWj1squPXGUnpmezWAquBav24lZZ+CaLoWkQ8DnmsGAQixXTwIyFDk/O4ZfcrevVdsatiL9+6SYU+Orhr2yjy2jrbYNc1nc+PtkkJatPf/EX8DIXGOHzTONr8AAAAASUVORK5CYII="/></a>
+            <a href="https://www.linkedin.com/in/yessine-aloui-3a547629a/" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATVJREFUSEvtljFuwkAQRR8HoExDFVrOkEhwDhQBoghHSAfcgg4iRWlzAkSU9Gkpk0PkAORHCxoPNga0lhHySCtL6915npm/O65RktVK4nJx4D5wAyyBryKykhbxJ3BnYA/AS2y4Bz8CMwdZA62iweM/wMRBfoF60eB74MNBXoFu0WD5HwFPQAN4A4aAoo5qF3eczo3uFtD4CSPTj49Ym1Zu9bMRnITXc+87ATYPT/v6HRikfUQa+Ns5XoTNmhZYyrc2TZnLhccAH1MWfVzimMYGq7YqlzelXCXZWSywnMp5Vjk037S1jgHeS2MQaNuFHR0s1UqA1qRwdThrNit7/Vj1OVXVCYcH0l2BE3WoUq105F2Zlbiybq+Dx0mb/I1je+u23/ru4+/m3HVX8wdyTIv8X1NaxBtPCGofbR6NigAAAABJRU5ErkJggg=="/></a>
+        </div>
+    </footer>
+    <style>
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            animation: slideInFooter 1s ease-out forwards;
+            transform: translateY(100%);
+        }
+
+        @keyframes slideInFooter {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .social-icons {
+            margin: 0.5rem 0;
+        }
+
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ddd;
+            transform: scale(1.2);
+        }
+    </style>
+    <script>
+        // Smooth Scroll to Sections
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle Header Background Change on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Add fade-in animation on load and control section heading visibility
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.fade-in').forEach(section => {
+                section.classList.add('visible');
+                const images = section.querySelectorAll('img');
+                images.forEach(img => img.classList.add('visible'));
+            });
+        });
+
+        // Handle Section Heading Visibility
+        function handleHeadingVisibility() {
+            const section1Heading = document.querySelector('#section1 h1');
+            const section1 = document.getElementById('section1');
+            const section1Rect = section1.getBoundingClientRect();
+
+            if (section1Rect.top < window.innerHeight && section1Rect.bottom >= 0) {
+                section1Heading.classList.add('visible');
+            } else {
+                section1Heading.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', handleHeadingVisibility);
+        window.addEventListener('load', handleHeadingVisibility);
+
+        // Toggle Sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mySidebar');
+            const isVisible = sidebar.style.left === '0px';
+            sidebar.style.left = isVisible ? '-250px' : '0px';
+            document.body.style.marginLeft = isVisible ? '0' : '250px';
+        }
+
+        function closeSidebar() {
+            document.getElementById('mySidebar').style.left = '-250px';
+            document.body.style.marginLeft = '0';
+        }
+    </script>
+</body>
+</html>

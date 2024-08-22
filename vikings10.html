@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikings - Project</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding-top: 60px; /* Offset for fixed header */
+            transition: margin-left 0.3s;
+        }
+
+        /* Header Styles */
+        header {
+            background: #000000;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideIn 1s ease-out forwards;
+            transform: translateY(-100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        header.scrolled {
+            background: #000000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { color: #fff; }
+            50% { color: #ddd; }
+            100% { color: #fff; }
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-buttons button {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        .nav-buttons button:hover {
+            background: #fff;
+            color: #333;
+            transform: scale(1.1);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hide the sidebar off-screen */
+            background-color: #000000;
+            color: #fff;
+            transition: left 0.3s ease-in-out;
+            overflow-x: hidden;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+            transform: translateX(10px);
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 2rem;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+        }
+
+        .section img.visible {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #section1 h1 {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateY(-20px);
+        }
+
+        #section1 h1.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            animation: slideInFooter 1s ease-out forwards;
+            transform: translateY(100%);
+        }
+
+        @keyframes slideInFooter {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .social-icons {
+            margin: 0.5rem 0;
+        }
+
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ddd;
+            transform: scale(1.2);
+        }
+
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background-color: #333;
+            color: #fff;
+        }
+
+        #home h1 {
+            margin-bottom: 1rem;
+        }
+
+        .home-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .home-buttons button {
+            background: #444;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .home-buttons button:hover {
+            background: #fff;
+            color: #333;
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="nav-buttons">
+            <button onclick="toggleSidebar()">☰</button>
+        </div>
+        <div class="logo">Vikings.</div>
+        <div class="nav-buttons">
+            <button onclick="scrollToSection('home')">Home</button>
+            <button onclick="scrollToSection('section1')">S1</button>
+            <button onclick="scrollToSection('section2')">S2</button>
+            <button onclick="scrollToSection('section3')">S3</button>
+        </div>
+    </header>
+
+    <div id="home" class="section fade-in">
+        <h1>Welcome to Vikings</h1>
+        <div class="home-buttons">
+            <button onclick="scrollToSection('section1')">Vikings</button>
+            <button onclick="scrollToSection('section3')">Viking Valhalla</button>
+        </div>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+        <a href="https://www.youtube.com/watch?v=9GgxinPwAGc"> <br> Vikings. </a>
+        <a href="https://www.youtube.com/watch?v=Yi4YnwFT7Gk"> <br> Viking Valhalla </a>
+        <a href="Similar.html"> <br> Similar Movies/Series </a>
+        
+    </div>
+    </div>
+
+    <div id="section1" class="section fade-in">
+        <br>
+        <br>
+        <br>
+        <h1>Vikings</h1>
+        <p><b>"Vikings" is a TV show about a legendary Norse warrior. It starts with him living a simple life as a farmer who dreams of exploring new places. He becomes famous for leading daring raids and battles.
+
+            The show follows his rise to power, showing how he becomes a respected leader and a key figure in Viking society. Along the way, he faces many challenges, including conflicts with rivals and struggles within his own family.
+            
+            His journey includes exploring new lands, making alliances, and dealing with betrayals. The series also dives into Viking culture, showing their customs and beliefs. The hero's family plays a big role in the story, with his wife, children, and close friends all having important parts.
+            
+            Throughout the series, there are lots of exciting action scenes, dramatic moments, and battles. The show mixes real historical events with Norse myths, offering a dramatic and engaging look at the Viking era.
+            </b></p>
+        <img src="https://imgs.search.brave.com/etbVaNkkEiKP0-mzgNmb-PxiXmuD5N_T50JDXSNyr4c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9XUTVOMlEy/TVdVdFpUbG1NQzAw/WWpJNUxUZ3lPV1F0/TlRBNE5tWTVNR1F6/TTJFd0wybHRZV2Rs/TDJsdFlXZGxYa0V5/WGtGcWNHZGVRWFZ5/TlRVd01USXlPRGdA/LmpwZw" alt="Placeholder Image" class="visible">
+    </div>
+
+    <div id="section2" class="section fade-in">
+        <br>
+        <br>
+        <h1>Ragnar Lothbrok</h1>
+        <p><b>- Ragnar Lothbrok is a figure from Norse history and legend whose life blends both historical facts and mythical elements. He is thought to have lived in the 9th century, a time when Viking raids were common across Europe. Historical texts and sagas describe Ragnar as a famous warrior and king known for his daring raids and battles. For instance, he is said to have led a significant raid on Paris in 845, which is mentioned in various historical accounts. However, it's important to note that much of what is known about Ragnar comes from sagas and mythological stories rather than concrete historical records. These stories often mix real events with fantasy elements, such as Ragnar’s interactions with gods and mythical creatures. Despite this, Ragnar is remembered as an iconic figure in Viking lore, representing the bravery and adventurous spirit of the time. <br>
+            - In the TV series "Vikings," Ragnar Lothbrok is portrayed as a dynamic and ambitious Viking leader who rises from being a simple farmer to becoming a legendary chieftain. The show dramatizes his life, adding fictional elements to enhance the narrative. Ragnar in the series is shown as a charismatic and fearless warrior, leading raids and navigating complex relationships with his family and rivals. The actor who plays Ragnar is Travis Fimmel. While the series draws inspiration from historical accounts and sagas, it takes creative liberties to craft a compelling and entertaining story. Fimmel’s portrayal brings a larger-than-life quality to Ragnar, blending historical inspiration with dramatic storytelling to captivate audiences.
+
+
+
+
+        </b></p>
+        <img src="https://imgs.search.brave.com/hcys5BZtltOdd3httP-qoiWvdg9_ZsK2qze-3OWmd2E/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDIwNDA0/MjEuanBn" alt="Placeholder Image" class="visible">
+    </div>
+
+
+    <div id="section3" class="section fade-in">
+        <br>
+        
+        
+        <h1>Viking Valhalla</h1>
+        <p><b>
+            - Valhalla is a term from Norse mythology referring to the great hall where slain warriors chosen by Odin go after death. It’s depicted as a majestic place where these warriors prepare for Ragnarök, the end-of-the-world battle. In historical context, the Vikings, who lived from roughly the 8th to 11th centuries, held complex beliefs about the afterlife and warrior culture. They believed in Valhalla as a place of honor for those who died bravely in battle. This belief was a central part of Viking warrior ethos, reflecting their values of bravery and honor. Historical accounts and sagas tell of Viking society's focus on valor and the glorification of heroic death, which influenced their mythology and cultural practices. <br>
+            - The Netflix series "Vikings: Valhalla" is a fictional continuation set 100 years after the original "Vikings" series. It follows new characters during the Viking Age as they explore, raid, and confront various challenges. The show incorporates some historical elements and figures, but much of the story is dramatized for entertainment. It explores themes like exploration, conflict, and the clash between pagans and Christians, reflecting the tumultuous period of Viking expansion. Characters in the series are inspired by real historical figures, but their stories are adapted and embellished to create an engaging narrative. The series blends historical facts with imaginative storytelling, aiming to capture the spirit of the Viking Age while providing thrilling and dramatic entertainment.
+        </b></p>
+        <img src="https://imgs.search.brave.com/AbfpQeIq9scZ5Eyc9upf3UZDeaQyleWHFCg32UTGeYw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly85bWV0/ZXJzLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvdmlraW5ncy12/YWxoYWxsYS53ZWJw" height="700" width="700" alt="Placeholder Image" class="visible">
+    </div>
+
+
+    <footer>
+        <p style="font-family:Andale Mono, monospace;">&copy; <b>Yessine Aloui</b></p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/yessine.aloui.7" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAMRJREFUSEvtltENgzAMRI9NyibtJmWStpPQTYBJYJT2UCNZESQmNERIzg8fIL/c+YxcodCpCnFxevD159zkPVcN3aOYsAcAB3UQwutYC1PBFwDjSvGsYEIJXzrZwEtqewCDuMUzh9XsaScKqxT6F0np8R1AKwpR7S2m0MBaq0Mp9l18A2hi1ucAv77Qv6V6i+JiYCacSQ8erdWyiI2T/UBiuZrfW7g0Ntk4HTZOXH3kvsUNxK21mlYlp1pdPPRhyjidG/wBFwwxH4oeX7wAAAAASUVORK5CYII="/></a>
+            <a href="https://www.instagram.com/yacine_aloui1/" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAcBJREFUSEvllk1OxDAMhT03gZMABwEBFwFOws9F+NmyZQ+cBPqN/JBJnTZtFhUi0qgznfg9+9lxvLON1m4jXvsTxAdmxmduPc1t4P+5iK/N7MjMjlvAfM+HP++HJ/bpqhFDdBsiFJieU35EJ9l/YmYjuxrxu5Mi280QcZN87o3SgeM4Aelh6WlGjMG5k+Ht0nXqKXxx1SC/M7OLCJQRK1q8bJE24kH64C8gwv4xizoj/nLDWhqQEkUoOoA/PSK+nw2yUlSsSyclkJHcJTigbCSnmcxU6VWiPcCqYpwC983MXh0PXPB+aqUkJh9IkxFHUgpOaSByyFi8L48QeOCuIpYSgP8CcEI5jDPkNp6CLmJFO6rOILtOQxl1F7FAiQbybNXS1EWcGhfs5BkHS1W6iDeTOhZXJrdkzoqvK2IAJSXfkfM59Gad7ew4qRNOHqepBqKOlTWQ2hnmfdqCa50rvVFChEhL48AZIkeBWl9PW3DWj1squPXGUnpmezWAquBav24lZZ+CaLoWkQ8DnmsGAQixXTwIyFDk/O4ZfcrevVdsatiL9+6SYU+Orhr2yjy2jrbYNc1nc+PtkkJatPf/EX8DIXGOHzTONr8AAAAASUVORK5CYII="/></a>
+            <a href="https://www.linkedin.com/in/yessine-aloui-3a547629a/" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATVJREFUSEvtljFuwkAQRR8HoExDFVrOkEhwDhQBoghHSAfcgg4iRWlzAkSU9Gkpk0PkAORHCxoPNga0lhHySCtL6915npm/O65RktVK4nJx4D5wAyyBryKykhbxJ3BnYA/AS2y4Bz8CMwdZA62iweM/wMRBfoF60eB74MNBXoFu0WD5HwFPQAN4A4aAoo5qF3eczo3uFtD4CSPTj49Ym1Zu9bMRnITXc+87ATYPT/v6HRikfUQa+Ns5XoTNmhZYyrc2TZnLhccAH1MWfVzimMYGq7YqlzelXCXZWSywnMp5Vjk037S1jgHeS2MQaNuFHR0s1UqA1qRwdThrNit7/Vj1OVXVCYcH0l2BE3WoUq105F2Zlbiybq+Dx0mb/I1je+u23/ru4+/m3HVX8wdyTIv8X1NaxBtPCGofbR6NigAAAABJRU5ErkJggg=="/></a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll to Sections
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle Header Background Change on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Add fade-in animation on load and control section heading visibility
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.fade-in').forEach(section => {
+                section.classList.add('visible');
+                const images = section.querySelectorAll('img');
+                images.forEach(img => img.classList.add('visible'));
+            });
+        });
+
+        // Handle Section Heading Visibility
+        function handleHeadingVisibility() {
+            const section1Heading = document.querySelector('#section1 h1');
+            const section1 = document.getElementById('section1');
+            const section1Rect = section1.getBoundingClientRect();
+
+            if (section1Rect.top < window.innerHeight && section1Rect.bottom >= 0) {
+                section1Heading.classList.add('visible');
+            } else {
+                section1Heading.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', handleHeadingVisibility);
+        window.addEventListener('load', handleHeadingVisibility);
+
+        // Toggle Sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mySidebar');
+            const isVisible = sidebar.style.left === '0px';
+            sidebar.style.left = isVisible ? '-250px' : '0px';
+            document.body.style.marginLeft = isVisible ? '0' : '250px';
+        }
+
+        function closeSidebar() {
+            document.getElementById('mySidebar').style.left = '-250px';
+            document.body.style.marginLeft = '0';
+        }
+    </script>
+</body>
+</html>
